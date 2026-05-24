@@ -1,0 +1,73 @@
+'use client'
+
+import { useState } from 'react'
+
+export default function Home() {
+const [year, setYear] = useState('2026')
+
+const convertYear = (y: number) => {
+if (y >= 2019) {
+return `令和${y - 2018}年です`
+}
+
+if (y >= 1989) {
+return `平成${y - 1988}年です`
+}
+
+if (y >= 1926) {
+return `昭和${y - 1925}年`
+}
+
+return '対応していません'
+}
+
+return (
+<main className="relative min-h-screen bg-black text-white flex items-center justify-center px-6">
+	<div className="max-w-2xl w-full text-center">
+		<h1 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight mb-6">
+			{year}は{convertYear(Number(year))}
+		</h1>
+
+<p className="text-gray-400 text-lg mb-10">
+Instant Western Calendar ⇄ Japanese Era Converter
+</p >
+
+			<div className="mx-auto w-max flex items-center gap-3">
+				<input
+					type="text"
+					inputMode="numeric"
+					pattern="[0-9]*"
+					value={year}
+					onChange={(e) => setYear(e.target.value.replace(/\D/g, ''))}
+					className="w-[9ch] bg-zinc-900 border border-zinc-700 rounded-2xl px-4 py-3 text-2xl text-center outline-none focus:border-white transition appearance-none"
+					placeholder="Enter year"
+				/>
+
+				<div className="flex flex-col space-y-2">
+					<button
+						type="button"
+						aria-label="增加年份"
+						onClick={() => setYear(String(Number(year || '0') + 1))}
+						className="h-10 w-10 md:h-12 md:w-12 rounded-lg bg-zinc-800 flex items-center justify-center text-xl touch-manipulation"
+					>
+						▲
+					</button>
+
+					<button
+						type="button"
+						aria-label="减少年份"
+						onClick={() => setYear(String(Number(year || '0') - 1))}
+						className="h-10 w-10 md:h-12 md:w-12 rounded-lg bg-zinc-800 flex items-center justify-center text-xl touch-manipulation"
+					>
+						▼
+					</button>
+				</div>
+			</div>
+
+		<div className="mt-10 text-gray-500 text-sm">Reiwa • Heisei • Showa Converter</div>
+	</div>
+
+	<div className="absolute bottom-4 w-full text-center text-sm text-gray-400">お問合せ先：xai.service.center@gmal.com</div>
+</main>
+)
+}
