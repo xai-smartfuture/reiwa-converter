@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "2026は令和8年です",
-  description: "XAI - start smart future",
+  title: "2026は令和8年です | Japanese Era Converter",
+  description: "Instant Convert Western years to Japanese Eras including Reiwa, Heisei, Showa, Taisho, and Meiji.showa,taisho,and meiji.",
 };
 
 export default function RootLayout({
