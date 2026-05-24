@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+const router = useRouter()
 const [year, setYear] = useState('2026')
 
 const convertYear = (y: number) => {
@@ -21,6 +23,16 @@ return `昭和${y - 1925}年`
 return '対応していません'
 }
 
+const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+event.preventDefault()
+
+if (!year) {
+return
+}
+
+router.push(`/${year}`)
+}
+
 return (
 <main className="relative min-h-screen bg-black text-white flex items-center justify-center px-6">
 	<div className="max-w-2xl w-full text-center">
@@ -32,17 +44,7 @@ return (
 Instant Western Calendar ⇄ Japanese Era Converter
 </p >
 
-			<div className="mx-auto w-max flex items-center gap-3">
-				<input
-					type="text"
-					inputMode="numeric"
-					pattern="[0-9]*"
-					value={year}
-					onChange={(e) => setYear(e.target.value.replace(/\D/g, ''))}
-					className="w-[9ch] bg-zinc-900 border border-zinc-700 rounded-2xl px-4 py-3 text-2xl text-center outline-none focus:border-white transition appearance-none"
-					placeholder="Enter year"
-				/>
-
+			<form onSubmit={handleSubmit} className="mx-auto w-max flex items-center gap-3">
 				<div className="flex flex-col space-y-2">
 					<button
 						type="button"
@@ -62,7 +64,25 @@ Instant Western Calendar ⇄ Japanese Era Converter
 						▼
 					</button>
 				</div>
-			</div>
+
+				<input
+					type="text"
+					inputMode="numeric"
+					enterKeyHint="go"
+					pattern="[0-9]*"
+					value={year}
+					onChange={(e) => setYear(e.target.value.replace(/\D/g, ''))}
+					className="w-[9ch] bg-zinc-900 border border-zinc-700 rounded-2xl px-4 py-3 text-2xl text-center outline-none focus:border-white transition appearance-none"
+					placeholder="Enter year"
+				/>
+
+				<button
+					type="submit"
+					className="h-12 rounded-lg bg-white px-5 text-sm font-semibold text-black transition hover:bg-zinc-200 touch-manipulation"
+				>
+					Convert
+				</button>
+			</form>
 
 		<div className="mt-10 text-gray-500 text-sm">Reiwa • Heisei • Showa Converter</div>
 	</div>
