@@ -8,6 +8,7 @@ import {
   getYearConversion,
   getYearSeoDescription,
 } from '../era'
+import { FAQJsonLd, FAQSection } from '../faq-schema'
 import { InternalLinkSection } from '../internal-link-section'
 import { getWesternYearInternalLinks } from '../internal-links'
 import { siteUrl } from '../site'
@@ -84,35 +85,24 @@ export default async function YearPage({
     conversion.westernYear < currentWesternYear ? conversion.westernYear + 1 : null
   const description = getYearSeoDescription(conversion)
   const internalLinks = getWesternYearInternalLinks(conversion)
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: `What Japanese era year is ${conversion.westernYear}?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: `${conversion.westernYear} is ${conversion.englishYear}, written as ${conversion.japaneseYear} in Japanese.`,
-        },
-      },
-      {
-        '@type': 'Question',
-        name: `How do you convert ${conversion.westernYear} to ${conversion.era.nameEn}?`,
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: `Subtract ${conversion.era.startYear - 1} from ${conversion.westernYear}. The result is ${conversion.eraYear}, so ${conversion.westernYear} is ${conversion.englishYear}.`,
-        },
-      },
-    ],
-  }
+  const faqItems = [
+    {
+      question: `What Japanese year is ${conversion.westernYear}?`,
+      answer: `${conversion.westernYear} is ${conversion.englishYear}, written as ${conversion.japaneseYear} in Japanese.`,
+    },
+    {
+      question: `Which era does ${conversion.westernYear} belong to?`,
+      answer: `${conversion.westernYear} belongs to the ${conversion.era.nameEn} era (${conversion.era.nameJa}).`,
+    },
+    {
+      question: `How do you convert ${conversion.westernYear} to ${conversion.era.nameEn}?`,
+      answer: `Subtract ${conversion.era.startYear - 1} from ${conversion.westernYear}. The result is ${conversion.eraYear}, so ${conversion.westernYear} is ${conversion.englishYear}.`,
+    },
+  ]
 
   return (
     <main className="min-h-screen bg-black text-white px-6 py-12">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <FAQJsonLd items={faqItems} />
 
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-10">
         <nav className="flex items-center justify-between text-sm text-zinc-400">
@@ -193,31 +183,7 @@ export default async function YearPage({
           </div>
         </section>
 
-        <section className="border-t border-zinc-800 pt-10">
-          <h2 className="text-2xl font-semibold">
-            Frequently asked questions
-          </h2>
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
-            <article>
-              <h3 className="font-semibold">
-                What Japanese year is {conversion.westernYear}?
-              </h3>
-              <p className="mt-3 leading-7 text-zinc-400">
-                {conversion.westernYear} is {conversion.englishYear}, written as{' '}
-                {conversion.japaneseYear} in Japanese.
-              </p>
-            </article>
-            <article>
-              <h3 className="font-semibold">
-                Which era does {conversion.westernYear} belong to?
-              </h3>
-              <p className="mt-3 leading-7 text-zinc-400">
-                {conversion.westernYear} belongs to the {conversion.era.nameEn}{' '}
-                era ({conversion.era.nameJa}).
-              </p>
-            </article>
-          </div>
-        </section>
+        <FAQSection items={faqItems} />
 
         <InternalLinkSection links={internalLinks} />
       </div>

@@ -6,6 +6,7 @@ import {
   getEraYearConversion,
   getEraYears,
 } from './era'
+import { FAQJsonLd, FAQSection } from './faq-schema'
 import { InternalLinkSection } from './internal-link-section'
 import { getEraYearInternalLinks } from './internal-links'
 import { siteUrl } from './site'
@@ -90,9 +91,25 @@ export async function EraYearPage({
       ? conversion.eraYear + 1
       : null
   const internalLinks = getEraYearInternalLinks(conversion)
+  const faqItems = [
+    {
+      question: `What Western year is ${conversion.japaneseYear}?`,
+      answer: `${conversion.japaneseYear} is ${conversion.westernYear} in the Western calendar.`,
+    },
+    {
+      question: `How do you convert ${conversion.japaneseYear} to a Western year?`,
+      answer: `Add ${conversion.era.westernOffset} to ${conversion.eraYear}. The result is ${conversion.westernYear}.`,
+    },
+    {
+      question: `Which Japanese era is ${conversion.japaneseYear}?`,
+      answer: `${conversion.japaneseYear} belongs to the ${conversion.era.nameEn} era (${conversion.era.nameJa}), which began on ${conversion.era.startDate}.`,
+    },
+  ]
 
   return (
     <main className="relative flex min-h-screen items-center justify-center bg-black px-6 py-12 text-white">
+      <FAQJsonLd items={faqItems} />
+
       <div className="w-full max-w-2xl text-center">
         <nav className="mb-10 flex items-center justify-between text-sm text-gray-500">
           <Link href="/" className="transition hover:text-white">
@@ -169,6 +186,10 @@ export async function EraYearPage({
 
         <div className="mt-10 text-sm text-gray-500">
           {conversion.era.nameEn} • Western Year • Japanese Era Converter
+        </div>
+
+        <div className="mt-10 text-left">
+          <FAQSection items={faqItems} />
         </div>
 
         <div className="mt-10 text-left">
