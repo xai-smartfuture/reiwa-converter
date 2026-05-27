@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
+import { siteUrl } from './site'
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reiwa-converter.vercel.app'
 const startYear = 1868
 const currentYear = new Date().getFullYear()
 

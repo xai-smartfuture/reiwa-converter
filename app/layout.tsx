@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { googleSiteVerification, siteUrl } from "./site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +14,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "2026は令和8年です | Japanese Era Converter",
   description: "Instant Convert Western years to Japanese Eras including Reiwa, Heisei, Showa, Taisho, and Meiji.showa,taisho,and meiji.",
+  alternates: {
+    canonical: "/",
+  },
+  ...(googleSiteVerification
+    ? {
+        verification: {
+          google: googleSiteVerification,
+        },
+      }
+    : {}),
 };
 
 export default function RootLayout({
