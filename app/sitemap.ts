@@ -4,6 +4,7 @@ import { siteUrl } from './site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const years = getSupportedYears()
+  const eraLandingUrls = getEraSlugs().map((slug) => `${siteUrl}/${slug}`)
   const eraUrls = getEraSlugs().flatMap((slug) =>
     getEraYears(slug).map((year) => `${siteUrl}/${slug}/${year}`),
   )
@@ -21,6 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: 'yearly' as const,
       priority: 0.8,
+    })),
+    ...eraLandingUrls.map((url) => ({
+      url,
+      lastModified,
+      changeFrequency: 'yearly' as const,
+      priority: 0.85,
     })),
     ...eraUrls.map((url) => ({
       url,

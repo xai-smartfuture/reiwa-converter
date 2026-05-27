@@ -89,7 +89,6 @@ Instant Western Calendar ⇄ Japanese Era Converter
 		</div>
 	</div>
 
-	<div className="absolute bottom-4 w-full text-center text-sm text-gray-400">お問合せ先：xai.service.center@gmal.com</div>
 </main>
 )
 }

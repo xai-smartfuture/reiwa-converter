@@ -31,6 +31,7 @@ export type HeiseiConversion = {
 export type EraYearConfig = Era & {
   lastEraYear: number
   westernOffset: number
+  description: string
   finalYearNote?: string
 }
 
@@ -54,6 +55,8 @@ export const eraYearConfigs: Record<EraSlug, EraYearConfig> = {
     startDate: 'May 1, 2019',
     lastEraYear: currentWesternYear - 2018,
     westernOffset: 2018,
+    description:
+      'Reiwa is the current Japanese era. It began on May 1, 2019, after the Heisei era ended.',
   },
   heisei: {
     slug: 'heisei',
@@ -63,6 +66,8 @@ export const eraYearConfigs: Record<EraSlug, EraYearConfig> = {
     startDate: 'January 8, 1989',
     lastEraYear: 31,
     westernOffset: 1988,
+    description:
+      'Heisei is the Japanese era that ran from 1989 to 2019. It began after the Showa era and ended when the Reiwa era started.',
     finalYearNote: '平成31年 is the final Heisei year. The Reiwa era began in 2019.',
   },
   showa: {
@@ -73,6 +78,8 @@ export const eraYearConfigs: Record<EraSlug, EraYearConfig> = {
     startDate: 'December 25, 1926',
     lastEraYear: 64,
     westernOffset: 1925,
+    description:
+      'Showa is the Japanese era that ran from 1926 to 1989. It sits between the Taisho and Heisei eras.',
     finalYearNote: '昭和64年 is the final Showa year. The Heisei era began in 1989.',
   },
   taisho: {
@@ -83,6 +90,8 @@ export const eraYearConfigs: Record<EraSlug, EraYearConfig> = {
     startDate: 'July 30, 1912',
     lastEraYear: 15,
     westernOffset: 1911,
+    description:
+      'Taisho is the Japanese era that ran from 1912 to 1926. It came after Meiji and before Showa.',
     finalYearNote: '大正15年 is the final Taisho year. The Showa era began in 1926.',
   },
   meiji: {
@@ -93,6 +102,8 @@ export const eraYearConfigs: Record<EraSlug, EraYearConfig> = {
     startDate: 'January 25, 1868',
     lastEraYear: 45,
     westernOffset: 1867,
+    description:
+      'Meiji is the Japanese era that began in 1868 and ended in 1912. It is the earliest era covered by this converter.',
     finalYearNote: '明治45年 is the final Meiji year. The Taisho era began in 1912.',
   },
 }
