@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ...(googleSiteVerification
     ? {
         verification: {
-          google: google644c0a6cd944fe55,
+          google: "dJLNcwHH5xFALJcizDZ-IyS3v-ubCOv0c-cCjV39Mm0",
         },
       }
     : {}),
