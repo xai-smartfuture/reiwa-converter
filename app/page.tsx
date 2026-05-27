@@ -2,25 +2,20 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { getYearConversion } from './era'
 
 export default function Home() {
 const router = useRouter()
 const [year, setYear] = useState('2026')
 
 const convertYear = (y: number) => {
-if (y >= 2019) {
-return `令和${y - 2018}年です`
-}
+const conversion = getYearConversion(y)
 
-if (y >= 1989) {
-return `平成${y - 1988}年です`
-}
-
-if (y >= 1926) {
-return `昭和${y - 1925}年`
-}
-
+if (!conversion) {
 return '対応していません'
+}
+
+return `${conversion.japaneseYear}です`
 }
 
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
