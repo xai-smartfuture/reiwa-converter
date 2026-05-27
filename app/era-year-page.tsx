@@ -6,6 +6,8 @@ import {
   getEraYearConversion,
   getEraYears,
 } from './era'
+import { InternalLinkSection } from './internal-link-section'
+import { getEraYearInternalLinks } from './internal-links'
 import { siteUrl } from './site'
 
 export type EraYearPageProps = {
@@ -87,6 +89,7 @@ export async function EraYearPage({
     conversion.eraYear < conversion.era.lastEraYear
       ? conversion.eraYear + 1
       : null
+  const internalLinks = getEraYearInternalLinks(conversion)
 
   return (
     <main className="relative flex min-h-screen items-center justify-center bg-black px-6 py-12 text-white">
@@ -166,6 +169,10 @@ export async function EraYearPage({
 
         <div className="mt-10 text-sm text-gray-500">
           {conversion.era.nameEn} • Western Year • Japanese Era Converter
+        </div>
+
+        <div className="mt-10 text-left">
+          <InternalLinkSection links={internalLinks} />
         </div>
       </div>
     </main>

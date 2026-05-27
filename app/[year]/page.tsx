@@ -8,6 +8,8 @@ import {
   getYearConversion,
   getYearSeoDescription,
 } from '../era'
+import { InternalLinkSection } from '../internal-link-section'
+import { getWesternYearInternalLinks } from '../internal-links'
 import { siteUrl } from '../site'
 
 type YearPageProps = {
@@ -81,6 +83,7 @@ export default async function YearPage({
   const nextYear =
     conversion.westernYear < currentWesternYear ? conversion.westernYear + 1 : null
   const description = getYearSeoDescription(conversion)
+  const internalLinks = getWesternYearInternalLinks(conversion)
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -215,6 +218,8 @@ export default async function YearPage({
             </article>
           </div>
         </section>
+
+        <InternalLinkSection links={internalLinks} />
       </div>
     </main>
   )

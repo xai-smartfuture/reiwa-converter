@@ -3,10 +3,13 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { getYearConversion } from './era'
+import { InternalLinkSection } from './internal-link-section'
+import { getHomeInternalLinks } from './internal-links'
 
 export default function Home() {
 const router = useRouter()
 const [year, setYear] = useState('2026')
+const internalLinks = getHomeInternalLinks()
 
 const convertYear = (y: number) => {
 const conversion = getYearConversion(y)
@@ -80,6 +83,10 @@ Instant Western Calendar ⇄ Japanese Era Converter
 			</form>
 
 		<div className="mt-10 text-gray-500 text-sm">Reiwa • Heisei • Showa Converter</div>
+
+		<div className="mt-10 text-left">
+			<InternalLinkSection title="Popular conversions" links={internalLinks} />
+		</div>
 	</div>
 
 	<div className="absolute bottom-4 w-full text-center text-sm text-gray-400">お問合せ先：xai.service.center@gmal.com</div>
