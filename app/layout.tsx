@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ...(googleSiteVerification
     ? {
         verification: {
-          google: googleSiteVerification,
+          google: google644c0a6cd944fe55,
         },
       }
     : {}),
